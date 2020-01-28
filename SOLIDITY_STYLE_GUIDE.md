@@ -1150,6 +1150,24 @@ Functions should use mixedCase.
 
     getBalance, transfer, verifyOwner, addMember, changeOwner
 
+### Internal Function Names
+
+Function names for `Internal` functions should be post prefixed with `Internal` to them
+
+`Example`
+
+```solidity
+function requestStakeInternal(
+    uint256 _amount,
+    address _beneficiary
+)
+    internal
+    returns (bool)
+{
+    ...
+}
+```
+
 ### Function Argument Names
 
 Function arguments should use mixedCase and start with underscore.
@@ -1247,7 +1265,7 @@ Variables should be always initialized.
 `Example`
 
 ```solidity
-function spam() internal {
+function spamInternal() internal {
     ...
     uint256 index = 0;
     bool isEmpty = false;
@@ -1263,7 +1281,7 @@ constructor call explicitly.
 `Good`
 
 ```solidity
-function spam(address a, bytes32 b, uint i) internal {
+function spamInternal(address a, bytes32 b, uint i) internal {
     ...
     require(a != address(0));
     require(b != bytes32(0));
@@ -1275,7 +1293,7 @@ function spam(address a, bytes32 b, uint i) internal {
 `Bad`
 
 ```solidity
-function spam(address a, bytes32 b) internal {
+function spamInternal(address a, bytes32 b) internal {
     ...
     require(a != 0);
     require(b != 0);
