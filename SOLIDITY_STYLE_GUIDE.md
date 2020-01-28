@@ -2,52 +2,54 @@
 
 ## Table of Contents
 
-  1. [Code Layout](#code-layout)
-        1. [Indentation](#indentation)
-        2. [Tabs or Spaces](#tabs-or-spaces)
-        3. [Blank Lines](#blank-lines)
-        4. [Maximum Line Length](#maximum-line-length)
-        5. [Imports](#imports)
-        6. [Order of Declarations](#order-of-declarations)
-        7. [Whitespace in Expressions](#whitespace-in-expressions)
-        8. [Control Structures](#control-structures)
-        9. [Function Declarations](#function-declarations)
-        10. [Variable Declarations](#variable-declarations)
-        11. [Other Recommendations](#other-recommendations)
-  2. [Naming Conventions](#naming-conventions)
-        1. [Naming Styles](#naming-styles)
-        2. [Names to Avoid](#names-to-avoid)
-        3. [Contract and Library Names](#contract-and-library-names)
-        4. [Struct Names](#struct-names)
-        5. [Event Names](#event-names)
-        6. [Function Names](#function-names)
-        7. [Function Argument Names](#function-argument-names)
-        8. [Function Return Parameter Names](#function-return-parameter-names)
-        9. [Local and State Variable Names](#local-and-state-variable-names)
-        10. [Constants](#constants)
-        11. [Modifier Names](#modifier-names)
-        12. [Enums](#enums)
-        13. [Avoiding Naming Collisions](#avoiding-naming-collisions)
-  3. [Best Practices](#best-practices)
-        1. [Variable Initialization](#variable-initialization)
-        2. [Casting](#casting)
-        3. [Require and Assert](#require-and-assert)
-        4. [Function Returns](#function-returns)
-  4. [Documentation](#documentation)
-        1. [Single Line](#single-line)
-        2. [Multi Line](#multi-line)
-        3. [Structs and Mappings](#structs-and-mappings)
-        4. [Spaces](#spaces)
-        5. [English Sentence](#english-sentence)
-        6. [Grouping](#grouping)
-        7. [Alignment](#alignment)
-        8. [Sections](#sections)
-  5. [Comments](#comments)
-  6. [Security](#security) 
-        1. [Checks Effects Interactions](#checks-effects-interactions)
+1. [Code Layout](#code-layout)
+   1. [Indentation](#indentation)
+   2. [Tabs or Spaces](#tabs-or-spaces)
+   3. [Blank Lines](#blank-lines)
+   4. [Maximum Line Length](#maximum-line-length)
+   5. [Imports](#imports)
+   6. [Order of Declarations](#order-of-declarations)
+   7. [Whitespace in Expressions](#whitespace-in-expressions)
+   8. [Control Structures](#control-structures)
+   9. [Function Declarations](#function-declarations)
+   10. [Variable Declarations](#variable-declarations)
+   11. [Other Recommendations](#other-recommendations)
+2. [Naming Conventions](#naming-conventions)
+   1. [Naming Styles](#naming-styles)
+   2. [Names to Avoid](#names-to-avoid)
+   3. [Contract and Library Names](#contract-and-library-names)
+   4. [Struct Names](#struct-names)
+   5. [Event Names](#event-names)
+   6. [Function Names](#function-names)
+   7. [Function Argument Names](#function-argument-names)
+   8. [Function Return Parameter Names](#function-return-parameter-names)
+   9. [Local and State Variable Names](#local-and-state-variable-names)
+   10. [Constants](#constants)
+   11. [Modifier Names](#modifier-names)
+   12. [Enums](#enums)
+   13. [Avoiding Naming Collisions](#avoiding-naming-collisions)
+3. [Best Practices](#best-practices)
+   1. [Variable Initialization](#variable-initialization)
+   2. [Casting](#casting)
+   3. [Require and Assert](#require-and-assert)
+   4. [Function Returns](#function-returns)
+4. [Documentation](#documentation)
+   1. [Single Line](#single-line)
+   2. [Multi Line](#multi-line)
+   3. [Structs and Mappings](#structs-and-mappings)
+   4. [Spaces](#spaces)
+   5. [English Sentence](#english-sentence)
+   6. [Grouping](#grouping)
+   7. [Alignment](#alignment)
+   8. [Sections](#sections)
+5. [Comments](#comments)
+6. [Security](#security)
+7. [Security](#security)
+8. [Security](#security)
+   1. [Checks Effects Interactions](#checks-effects-interactions)
 
-*The current style guide is mostly based on [Ethereum Solidity Style Guide](http://solidity.readthedocs.io/en/v0.4.24/style-guide.html)
-with some changes and additions.*
+_The current style guide is mostly based on [Ethereum Solidity Style Guide](http://solidity.readthedocs.io/en/v0.4.24/style-guide.html)
+with some changes and additions._
 
 ## Code Layout
 
@@ -138,7 +140,7 @@ contract A {
 ```
 
 Within a contract surround event, enum, struct and modifier declarations
-with a *single* blank line.
+with a _single_ blank line.
 
 `Example`
 
@@ -175,7 +177,7 @@ contract A {
 }
 ```
 
-Within a struct, surround documented field declarations with a *single* blank
+Within a struct, surround documented field declarations with a _single_ blank
 line.
 
 `Example`
@@ -261,7 +263,7 @@ contract A {
 ```
 
 Surround declaration groups (using sections, event sections, function sections, etc)
-in solidity contract with *two* blank lines.
+in solidity contract with _two_ blank lines.
 
 `Good`
 
@@ -532,7 +534,7 @@ To read contract top down the following order is suggested:
 
 ### Whitespace in Expressions
 
-Avoid extraneous whitespace in the following  situations:
+Avoid extraneous whitespace in the following situations:
 
 Immediately inside parenthesis, brackets or braces, with the exception of
 single line function declarations.
@@ -766,7 +768,7 @@ function increment(uint x) public pure returns (uint) {
 ```
 
 For long function declarations, it is recommended to drop each argument onto
-it's own line at the same indentation level as the function body.  The closing
+it's own line at the same indentation level as the function body. The closing
 parenthesis and opening bracket should be placed on their own line as well at
 the same indentation level as the function declaration.
 
@@ -1065,8 +1067,8 @@ x |= y&&z;
 
 ## Naming Conventions
 
-Naming conventions are powerful when adopted and used broadly.  The use of
-different conventions can convey significant *meta* information that would
+Naming conventions are powerful when adopted and used broadly. The use of
+different conventions can convey significant _meta_ information that would
 otherwise not be immediately available.
 
 The naming recommendations given here are intended to improve the readability,
@@ -1091,11 +1093,11 @@ naming styles.
 - `mixedCase` (differs from CapitalizedWords by initial lowercase character!)
 - `Capitalized_Words_With_Underscores`
 
-    `NOTE:` When using initialism in CapWords, capitalize all the letters of the
-    initialism. Thus HTTPServerError is better than HttpServerError.
-    When using initialism is mixedCase, capitalize all the letters of the
-    initialism, except keep the first one lower case if it is the
-    beginning of the name. Thus xmlHTTPRequest is better than XMLHTTPRequest.
+  `NOTE:` When using initialism in CapWords, capitalize all the letters of the
+  initialism. Thus HTTPServerError is better than HttpServerError.
+  When using initialism is mixedCase, capitalize all the letters of the
+  initialism, except keep the first one lower case if it is the
+  beginning of the name. Thus xmlHTTPRequest is better than XMLHTTPRequest.
 
 ### Names to Avoid
 
@@ -1103,7 +1105,7 @@ naming styles.
 - `O` - Uppercase letter oh
 - `I` - Uppercase letter eye
 
-Never use any of these for single letter variable names.  They are often
+Never use any of these for single letter variable names. They are often
 indistinguishable from the numerals one and zero.
 
 ### Contract and Library Names
@@ -1118,7 +1120,7 @@ Libraries' names should not include `Lib` prefix/postfix.
 
 `Good`
 
-    SafeMath, UpradableProxy
+    SafeMath, UpgradableProxy
 
 `Bad`
 
@@ -1289,7 +1291,7 @@ Use `assert(condition, message)` if you never ever want the condition to be `fal
 Use `require(condition, message)` if condition can be `false`, due to e.g. invalid input,
 contract state variables are not met, a failing external component.
 
-Specifying *message* parameter for `require` is mandatory.
+Specifying _message_ parameter for `require` is mandatory.
 For `assert` use your best judgement.
 
 ### Function Returns
@@ -1431,7 +1433,7 @@ Document struct fields above the respective field.
 ```solidity
 /** A Bank has a single owner. You need to create one bank per person. */
 struct Bank {
-    /** The owner of the bank functions simultaniously as the owner of the funds in balance. */
+    /** The owner of the bank functions simultaneously as the owner of the funds in balance. */
     address owner;
 
     /** The balance of the owner in Ethereum Wei. */
@@ -1469,7 +1471,7 @@ struct Message {
 ```solidity
 /** A Bank has a single owner. You need to create one bank per person. */
 struct Bank {
-    address owner; /** The owner of the bank functions simultaniously as the owner of the funds in balance. */
+    address owner; /** The owner of the bank functions simultaneously as the owner of the funds in balance. */
     uint256 balance; // The balance of the owner in Ethereum Wei.
 }
 ```
@@ -1853,52 +1855,51 @@ function processStaking(
     ...
 }
 ```
+
 ## Security
 
 ### Checks Effects Interactions
 
 [Checks effects interactions](https://github.com/fravoll/solidity-patterns/blob/master/docs/checks_effects_interactions.md) pattern should be used for writing contract methods which make external calls. This pattern reduces the attack surface for malicious contracts trying to hijack control flow after an external call.
 
-When to use this pattern: 
+When to use this pattern:
 
-* It cannot be avoided to hand over control flow to an external entity.
-* You want to protect your functions against re-entrancy attacks.
+- It cannot be avoided to hand over control flow to an external entity.
+- You want to protect your functions against re-entrancy attacks.
 
 Details:
 
-1. **Checks**: If input is not acceptable then fail fast and fail hard. 
+1. **Checks**: If input is not acceptable then fail fast and fail hard.
 
-    ```solidity
-    require(someCondition);
-    ```
+   ```solidity
+   require(someCondition);
+   ```
 
 2. **Effects**: Optimistically update the contract to a new valid state assuming that interactions will be successful. This protects the contract from re-entrancy attack and race conditions.
 
-    ```solidity
-    balance[msg.sender] = 0;
-    ```
+   ```solidity
+   balance[msg.sender] = 0;
+   ```
 
-3. **Interactions**: External calls, including `.send()`, `.transfer()` and `.call()`, must be done at the end of the method. 
+3. **Interactions**: External calls, including `.send()`, `.transfer()` and `.call()`, must be done at the end of the method.
 
-    ```solidity
-    require(otherContract.doSomething());
-    ```
+   ```solidity
+   require(otherContract.doSomething());
+   ```
 
+Example:
 
-Example: 
 ```
 function withdraw(uint256 _amount) public {
     require(balances[msg.sender] >= _amount); // Checks
 
     balances[msg.sender] -= _amount;          // Effects
 
-    require(                                 // Interactions 
+    require(                                 // Interactions
         msg.sender.send(_amount),
         "Fund transfer failed."
     );
 }
 ```
 
-**Note**: Even if emitting an event is technically considered as state change, it is not necessary to emit the event before an external call. For example, events could be listed at the end of the method in favor of readability. 
-
-
+**Note**: Even if emitting an event is technically considered as state change, it is not necessary to emit the event before an external call. For example, events could be listed at the end of the method in favor of readability.
