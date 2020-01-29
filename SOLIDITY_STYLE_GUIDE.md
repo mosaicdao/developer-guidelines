@@ -1892,6 +1892,16 @@ function processStaking(
 }
 ```
 
+### Contract folder names
+
+If the contract name consists of multiple words then separate the name of the folder containing the contract by `-`
+
+`Example`
+
+If the contract name is `ValidatorSet`. The folder containing the contract should be
+
+- validator-set
+
 ## Test cases
 
 ### Test contract naming
@@ -1913,7 +1923,7 @@ If the contract name is `Foo`, then the names for the test contracts should foll
 - For `Double` contracts
   - `FooDouble` as the name of the contract
 
-### Test case documentation
+### Test contract documentations
 
 The documentation for `Mock`, `Spy`, `Test`, `Double` contracts and its functions should also exist
 
