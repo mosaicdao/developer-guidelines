@@ -491,6 +491,24 @@ contract B is owned {
 }
 ```
 
+### Order of imports
+
+The imports should be sorted by path
+
+`Good`
+
+```solidity
+import "./Bar";
+import "./Foo";
+```
+
+`Bad`
+
+```solidity
+import "./Foo";
+import "./Bar";
+```
+
 ### Order of Declarations
 
 Ordering helps readers identify which functions they can call
