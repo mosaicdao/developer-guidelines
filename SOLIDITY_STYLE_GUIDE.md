@@ -1913,6 +1913,34 @@ If the contract name is `Foo`, then the names for the test contracts should foll
 - For `Double` contracts
   - `FooDouble` as the name of the contract
 
+### Test case documentation
+
+The documentation for `Mock`, `Spy`, `Test`, `Double` contracts and its functions should also exist
+
+`Example`
+
+```solidity
+/**
+ * @title ValidatorSetDouble contract.
+ *
+ * @notice It is used for testing ValidatorSet contract.
+ */
+contract ValidatorSetDouble is ValidatorSet {
+
+    /* External Functions */
+
+    /**
+     * @notice It is used to insert validator.
+     *
+     * @param _validator Validator address.
+     * @param _beginHeight Begin height for the validator.
+     */
+    function insertValidator(address _validator, uint256 _beginHeight) external {
+        ....
+    }
+}
+```
+
 ## Security
 
 ### Checks Effects Interactions
