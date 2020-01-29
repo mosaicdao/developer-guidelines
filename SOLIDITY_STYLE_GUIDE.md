@@ -1951,6 +1951,16 @@ contract ValidatorSetDouble is ValidatorSet {
 }
 ```
 
+### Test contract folder names
+
+If the parent contract of the test contract consists of multiple words then separate the name of the folder containing the contract by `-`. The name of the parent contract will be used while naming the contract.
+
+`Example`
+
+If the parent contract name is `ValidatorSet` and the test contract name is `ValidatorSetDouble`. The folder containing the contract should be
+
+- validator-set
+
 ## Security
 
 ### Checks Effects Interactions
