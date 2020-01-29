@@ -1874,6 +1874,27 @@ function processStaking(
 }
 ```
 
+## Test cases
+
+### Test contract naming
+
+If the contract name is `Foo`, then the names for the test contracts should follow
+
+- For `Mock` contracts
+
+  - `FooMock` as the name of the contract
+
+- For `Spy` contracts
+
+  - `FooSpy` as the name of the contract
+
+- For `Test` contracts
+
+  - `FooTest` as the name of the contract
+
+- For `Double` contracts
+  - `FooDouble` as the name of the contract
+
 ## Security
 
 ### Checks Effects Interactions
