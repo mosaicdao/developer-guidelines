@@ -1990,16 +1990,6 @@ If the parent contract name is `ValidatorSet` and the test contract name is `Val
 
 - validator-set
 
-### Test cases folder names
-
-If the contract name consists of multiple words then separate the name of the folder containing the test cases of the contract by `_`
-
-`Example`
-
-If the contract name is `ValidatorSet`. The folder containing the test cases of the contract should be
-
-- validator_set
-
 ## Security
 
 ### Checks Effects Interactions
