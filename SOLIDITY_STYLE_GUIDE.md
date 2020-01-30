@@ -491,19 +491,22 @@ contract B is owned {
 
 ### Order of imports
 
-The imports should be sorted by path and if the paths are different then they should be separated into sections
+The imports should be:
+- sorted(alphabetically) by path
+- internal and external imports should be separated into sections
+- external imports should follow the internal imports
 
 `Good`
 
 ```solidity
 import "./Bar";
 import "./Foo";
-
 import "../Bar";
 import "../Foo";
-
 import "../../Bar";
 import "../../Foo";
+
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 ```
 
 `Bad`
@@ -516,11 +519,16 @@ import "../Foo";
 
 import "../../Foo";
 import "../../Bar";
+
+
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 ```
 
 `Bad`
 
 ```solidity
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+
 import "../../Foo";
 import "../../Bar";
 
@@ -1435,14 +1443,16 @@ uint256 public bounty;
 
 ### Function Documentation
 
-The function documentation must have following sections:
+If the function takes parameters and returns some value then the function documentation must have following sections:
 
 - `@notice`
 - `@param`
 - `@return`
 
-`@dev` section is optional, this will hold any extra details.
-and no other section should be added to the function documentation.
+Note: `@dev` section is optional, this will hold any extra details.
+`@pre` and `@post` sections are also optional.
+And no other section should be added to the function documentation.
+
 
 `Example`
 
@@ -1929,13 +1939,17 @@ If the contract name consists of multiple words then separate the name of the fo
 
 If the contract name is `ValidatorSet`. The folder containing the contract should be
 
-- validator-set
+    validator-set
 
 ## Test cases
 
 ### Test contract naming
 
-If the contract name is `Foo`, then the names for the test contracts should follow
+If the contract name is `Foo`, then the names for the test contracts should be postfixed with `Mock`, `Spy`, `Double`
+
+`Note:` At the instances where the `Test` was being postfixed or prefixed, it should be postfixed with `Double`
+
+`Example`
 
 - For `Mock` contracts
 
@@ -1945,16 +1959,16 @@ If the contract name is `Foo`, then the names for the test contracts should foll
 
   - `FooSpy` as the name of the contract
 
-- For `Test` contracts
-
-  - `FooTest` as the name of the contract
-
 - For `Double` contracts
+
   - `FooDouble` as the name of the contract
 
 ### Test contract documentations
 
-The documentation for `Mock`, `Spy`, `Test`, `Double` contracts and its functions should also exist
+The documentation for `Mock`, `Spy`, `Double` contracts and its functions should have:
+
+- `@title` and `@notice` for contract
+- `@notice` for must and `@dev` is optional for functions
 
 `Example`
 
@@ -1966,14 +1980,7 @@ The documentation for `Mock`, `Spy`, `Test`, `Double` contracts and its function
  */
 contract ValidatorSetDouble is ValidatorSet {
 
-    /* External Functions */
-
-    /**
-     * @notice It is used to insert validator.
-     *
-     * @param _validator Validator address.
-     * @param _beginHeight Begin height for the validator.
-     */
+    /** @notice It is used to insert validator. */
     function insertValidator(address _validator, uint256 _beginHeight) external {
         ....
     }
@@ -1988,7 +1995,7 @@ If the parent contract of the test contract consists of multiple words then sepa
 
 If the parent contract name is `ValidatorSet` and the test contract name is `ValidatorSetDouble`. The folder containing the contract should be
 
-- validator-set
+    validator-set
 
 ## Security
 
