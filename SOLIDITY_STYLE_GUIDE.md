@@ -563,9 +563,9 @@ Within a grouping, place the `view` and `pure` functions last.
 To read contract top down the following order is suggested:
 
 - usings
+- enums
 - events
 - constants
-- enums
 - structs
 - public variables
 - internal variables
