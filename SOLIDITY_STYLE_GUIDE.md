@@ -44,8 +44,6 @@
    8. [Sections](#sections)
 5. [Comments](#comments)
 6. [Security](#security)
-7. [Security](#security)
-8. [Security](#security)
    1. [Checks Effects Interactions](#checks-effects-interactions)
 
 _The current style guide is mostly based on [Ethereum Solidity Style Guide](http://solidity.readthedocs.io/en/v0.4.24/style-guide.html)
@@ -493,13 +491,19 @@ contract B is owned {
 
 ### Order of imports
 
-The imports should be sorted by path
+The imports should be sorted by path and if the paths are different then they should be separated into sections
 
 `Good`
 
 ```solidity
 import "./Bar";
 import "./Foo";
+
+import "../Bar";
+import "../Foo";
+
+import "../../Bar";
+import "../../Foo";
 ```
 
 `Bad`
@@ -507,6 +511,23 @@ import "./Foo";
 ```solidity
 import "./Foo";
 import "./Bar";
+import "../Bar";
+import "../Foo";
+
+import "../../Foo";
+import "../../Bar";
+```
+
+`Bad`
+
+```solidity
+import "../../Foo";
+import "../../Bar";
+
+import "./Foo";
+import "./Bar";
+import "../Bar";
+import "../Foo";
 ```
 
 ### Order of Declarations
@@ -1400,39 +1421,47 @@ Avoid using `@author` documentation tag.
 Single line documentation format is:
 
 `Good`
-
-```solidity
-/** @notice Returns storage root at the specified block height. */
-function getStorageRoot(uint256 _blockHeight)
-    public
-    view
-    returns (bytes32 /* storage root */)
-{
-    ...
-}
-
 /** Bounty amount to take from facilitator on accepting stake. */
 uint256 public bounty;
 ```
 
 `Bad`
 
-```solidity
-/**
- * @notice Returns storage root at the specified block height.
- */
-function getStorageRoot(uint256 _blockHeight)
-    public
-    view
-    returns (bytes32 /* storage root */)
-{
-    ...
-}
-
 /**
  * Bounty amount to take from facilitator on accepting stake.
  */
 uint256 public bounty;
+```
+
+### Function Documentation
+
+The function documentation must have following sections:
+
+- `@notice`
+- `@param`
+- `@return`
+
+`@dev` section is optional, this will hold any extra details.
+and no other section should be added to the function documentation.
+
+`Example`
+
+```solidity
+/**
+ * @notice Returns storage root at the specified block height.
+ *
+ * @param _blockHeight Block height to return storage root.
+ *
+ * @return bytes32(0) if a storage root for specified block height was not
+ *         verified otherwise saved storage root.
+ */
+function getStorageRoot(uint256 _blockHeight)
+    public
+    view
+    returns (bytes32)
+{
+    ...
+}
 ```
 
 ### Multi Line
