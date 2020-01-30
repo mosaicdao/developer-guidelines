@@ -1173,6 +1173,22 @@ Libraries' names should not include `Lib` prefix/postfix.
 
     SafeMathLib, LibUpgradableProxy
 
+#### Interface contract names
+
+Interfaces should have the `Interface` postfix in naming.
+
+`Example`
+
+    ConsensusInterface, GatewayInterface
+
+#### Abstract contract names
+
+Abstract contracts should have the `Abstract` postfix in naming.
+
+`Example`
+
+    ProtocoreAbstract, ForwardValidatorSetAbstract
+
 ### Struct Names
 
 Structs should be named using the CapWords style.
