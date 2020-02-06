@@ -1984,7 +1984,7 @@ If the contract name is `Foo`, then the names for the test contracts should be p
 The documentation for `Mock`, `Spy`, `Double` contracts and its functions should have:
 
 - `@title` and `@notice` for contract
-- `@notice` for must and `@dev` is optional for functions
+- `@notice` is must and `@dev` is optional for functions
 
 `Example`
 
