@@ -1513,6 +1513,8 @@ No implementation details should be exposed in `\pre` and `\post` conditions.
 One should be able to write negative and positive test cases following a function
 documentation and especially `\pre` and `\post` conditions.
 
+`\pre` and `\post` conditions are required for `external` and `public` interfaces.
+
 ### Structs and Mappings
 
 Document structs above the struct declaration.
