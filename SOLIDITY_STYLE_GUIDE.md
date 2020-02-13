@@ -2,52 +2,57 @@
 
 ## Table of Contents
 
-  1. [Code Layout](#code-layout)
-        1. [Indentation](#indentation)
-        2. [Tabs or Spaces](#tabs-or-spaces)
-        3. [Blank Lines](#blank-lines)
-        4. [Maximum Line Length](#maximum-line-length)
-        5. [Imports](#imports)
-        6. [Order of Declarations](#order-of-declarations)
-        7. [Whitespace in Expressions](#whitespace-in-expressions)
-        8. [Control Structures](#control-structures)
-        9. [Function Declarations](#function-declarations)
-        10. [Variable Declarations](#variable-declarations)
-        11. [Other Recommendations](#other-recommendations)
-  2. [Naming Conventions](#naming-conventions)
-        1. [Naming Styles](#naming-styles)
-        2. [Names to Avoid](#names-to-avoid)
-        3. [Contract and Library Names](#contract-and-library-names)
-        4. [Struct Names](#struct-names)
-        5. [Event Names](#event-names)
-        6. [Function Names](#function-names)
-        7. [Function Argument Names](#function-argument-names)
-        8. [Function Return Parameter Names](#function-return-parameter-names)
-        9. [Local and State Variable Names](#local-and-state-variable-names)
-        10. [Constants](#constants)
-        11. [Modifier Names](#modifier-names)
-        12. [Enums](#enums)
-        13. [Avoiding Naming Collisions](#avoiding-naming-collisions)
-  3. [Best Practices](#best-practices)
-        1. [Variable Initialization](#variable-initialization)
-        2. [Casting](#casting)
-        3. [Require and Assert](#require-and-assert)
-        4. [Function Returns](#function-returns)
-  4. [Documentation](#documentation)
-        1. [Single Line](#single-line)
-        2. [Multi Line](#multi-line)
-        3. [Structs and Mappings](#structs-and-mappings)
-        4. [Spaces](#spaces)
-        5. [English Sentence](#english-sentence)
-        6. [Grouping](#grouping)
-        7. [Alignment](#alignment)
-        8. [Sections](#sections)
-  5. [Comments](#comments)
-  6. [Security](#security) 
-        1. [Checks Effects Interactions](#checks-effects-interactions)
+1. [Code Layout](#code-layout)
+   1. [Indentation](#indentation)
+   2. [Tabs or Spaces](#tabs-or-spaces)
+   3. [Blank Lines](#blank-lines)
+   4. [Maximum Line Length](#maximum-line-length)
+   5. [Imports](#imports)
+   6. [Order of Declarations](#order-of-declarations)
+   7. [Whitespace in Expressions](#whitespace-in-expressions)
+   8. [Control Structures](#control-structures)
+   9. [Function Declarations](#function-declarations)
+   10. [Variable Declarations](#variable-declarations)
+   11. [Other Recommendations](#other-recommendations)
+2. [Naming Conventions](#naming-conventions)
+   1. [Americanization](#americanization)
+   2. [Naming Styles](#naming-styles)
+   3. [Names to Avoid](#names-to-avoid)
+   4. [Contract and Library Names](#contract-and-library-names)
+   5. [Struct Names](#struct-names)
+   6. [Event Names](#event-names)
+   7. [Function Names](#function-names)
+   8. [Function Argument Names](#function-argument-names)
+   9. [Function Return Parameter Names](#function-return-parameter-names)
+   10. [Local and State Variable Names](#local-and-state-variable-names)
+   11. [Constants](#constants)
+   12. [Modifier Names](#modifier-names)
+   13. [Enums](#enums)
+   14. [Avoiding Naming Collisions](#avoiding-naming-collisions)
+   15. [Directory Naming](#directory-naming)
+3. [Best Practices](#best-practices)
+   1. [Variable Initialization](#variable-initialization)
+   2. [Casting](#casting)
+   3. [Require and Assert](#require-and-assert)
+   4. [Function Returns](#function-returns)
+4. [Documentation](#documentation)
+   1. [Contract Documentation](#contract-documentation)
+   2. [Function Documentation](#function-documentation)
+      1. [Pre and Post Documentation Tags](#pre-and-post-documentation-tags)
+   3. [Structs and Mappings](#structs-and-mappings)
+   4. [Single Line](#single-line)
+   5. [Multi Line](#multi-line)
+   6. [Spaces](#spaces)
+   7. [English Sentence](#english-sentence)
+   8. [Grouping](#grouping)
+   9. [Alignment](#alignment)
+   10. [Sections](#sections)
+5. [Comments](#comments)
+6. [Security](#security)
+   1. [Checks Effects Interactions](#checks-effects-interactions)
 
-*The current style guide is mostly based on [Ethereum Solidity Style Guide](http://solidity.readthedocs.io/en/v0.4.24/style-guide.html)
-with some changes and additions.*
+_The current style guide is mostly based on [Ethereum Solidity Style Guide](http://solidity.readthedocs.io/en/v0.4.24/style-guide.html)
+with some changes and additions._
 
 ## Code Layout
 
@@ -489,6 +494,56 @@ contract B is owned {
 }
 ```
 
+### Order of imports
+
+The imports should be:
+
+- sorted(alphabetically) by path
+- internal and external imports should be separated into sections
+- external (with regards to the project) imports should follow the internal imports
+
+`Good`
+
+```solidity
+import "./Bar";
+import "./Foo";
+import "../Bar";
+import "../Foo";
+import "../../Bar";
+import "../../Foo";
+
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+```
+
+`Bad`
+
+```solidity
+import "./Foo";
+import "./Bar";
+import "../Bar";
+import "../Foo";
+
+import "../../Foo";
+import "../../Bar";
+
+
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+```
+
+`Bad`
+
+```solidity
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+
+import "../../Foo";
+import "../../Bar";
+
+import "./Foo";
+import "./Bar";
+import "../Bar";
+import "../Foo";
+```
+
 ### Order of Declarations
 
 Ordering helps readers identify which functions they can call
@@ -514,9 +569,9 @@ Within a grouping, place the `view` and `pure` functions last.
 To read contract top down the following order is suggested:
 
 - usings
+- enums
 - events
 - constants
-- enums
 - structs
 - public variables
 - internal variables
@@ -532,7 +587,7 @@ To read contract top down the following order is suggested:
 
 ### Whitespace in Expressions
 
-Avoid extraneous whitespace in the following  situations:
+Avoid extraneous whitespace in the following situations:
 
 Immediately inside parenthesis, brackets or braces, with the exception of
 single line function declarations.
@@ -766,7 +821,7 @@ function increment(uint x) public pure returns (uint) {
 ```
 
 For long function declarations, it is recommended to drop each argument onto
-it's own line at the same indentation level as the function body.  The closing
+it's own line at the same indentation level as the function body. The closing
 parenthesis and opening bracket should be placed on their own line as well at
 the same indentation level as the function declaration.
 
@@ -1065,7 +1120,7 @@ x |= y&&z;
 
 ## Naming Conventions
 
-Naming conventions are powerful when adopted and used broadly.  The use of
+Naming conventions are powerful when adopted and used broadly. The use of
 different conventions can convey significant *meta* information that would
 otherwise not be immediately available.
 
@@ -1075,6 +1130,11 @@ most information through the names of things.
 
 Lastly, consistency within a codebase should always supersede any conventions
 outlined in this document.
+
+### Americanization
+
+Americanization is preferred in documentation. Instead of finali**s**e,
+use finali**z**e and so on.
 
 ### Naming Styles
 
@@ -1091,11 +1151,11 @@ naming styles.
 - `mixedCase` (differs from CapitalizedWords by initial lowercase character!)
 - `Capitalized_Words_With_Underscores`
 
-    `NOTE:` When using initialism in CapWords, capitalize all the letters of the
-    initialism. Thus HTTPServerError is better than HttpServerError.
-    When using initialism is mixedCase, capitalize all the letters of the
-    initialism, except keep the first one lower case if it is the
-    beginning of the name. Thus xmlHTTPRequest is better than XMLHTTPRequest.
+  `NOTE:` When using initialism in CapWords, capitalize all the letters of the
+  initialism. Thus HTTPServerError is better than HttpServerError.
+  When using initialism is mixedCase, capitalize all the letters of the
+  initialism, except keep the first one lower case if it is the
+  beginning of the name. Thus xmlHTTPRequest is better than XMLHTTPRequest.
 
 ### Names to Avoid
 
@@ -1103,7 +1163,7 @@ naming styles.
 - `O` - Uppercase letter oh
 - `I` - Uppercase letter eye
 
-Never use any of these for single letter variable names.  They are often
+Never use any of these for single letter variable names. They are often
 indistinguishable from the numerals one and zero.
 
 ### Contract and Library Names
@@ -1112,17 +1172,33 @@ Contracts and libraries should be named using the CapWords style.
 
 `Example`
 
-    SimpleToken, MerklePatriciaProof, OpenSTValueInterface
+> SimpleToken, MerklePatriciaProof, OpenSTValueInterface
 
 Libraries' names should not include `Lib` prefix/postfix.
 
 `Good`
 
-    SafeMath, UpradableProxy
+> SafeMath, UpgradableProxy
 
 `Bad`
 
-    SafeMathLib, LibUpgradableProxy
+> SafeMathLib, LibUpgradableProxy
+
+#### Interface Contract Names
+
+Interfaces should have the `Interface` postfix in naming.
+
+`Example`
+
+> ConsensusInterface, GatewayInterface
+
+#### Abstract Contract Names
+
+Abstract contracts should have the `Abstract` postfix in naming.
+
+`Example`
+
+> ProtocoreAbstract, ForwardValidatorSetAbstract
 
 ### Struct Names
 
@@ -1130,7 +1206,7 @@ Structs should be named using the CapWords style.
 
 `Example`
 
-    MyCoin, Position
+> MyCoin, Position
 
 ### Event Names
 
@@ -1138,7 +1214,7 @@ Events should be named using the CapWords style.
 
 `Example`
 
-    Deposit, Transfer, Approval, BeforeTransfer, AfterTransfer
+> Deposit, Transfer, Approval, BeforeTransfer, AfterTransfer
 
 ### Function Names
 
@@ -1146,7 +1222,25 @@ Functions should use mixedCase.
 
 `Example`
 
-    getBalance, transfer, verifyOwner, addMember, changeOwner
+> getBalance, transfer, verifyOwner, addMember, changeOwner
+
+#### Internal Function Names
+
+Function names for `Internal` functions should be post prefixed with `Internal` to them
+
+`Example`
+
+```solidity
+function requestStakeInternal(
+    uint256 _amount,
+    address _beneficiary
+)
+    internal
+    returns (bool)
+{
+    ...
+}
+```
 
 ### Function Argument Names
 
@@ -1154,19 +1248,7 @@ Function arguments should use mixedCase and start with underscore.
 
 `Example`
 
-    _initialSupply, _account, _recipientAddress
-
-```solidity
-function requestStake(
-    uint256 _amount,
-    address _beneficiary
-)
-    external
-    returns (bool)
-{
-    ...
-}
-```
+> _initialSupply, _account, _recipientAddress
 
 When writing library functions that operate on a custom struct, the struct
 should be the first argument and should always be named `self`.
@@ -1177,23 +1259,7 @@ Function named return parameters should use mixedCase and end with underscore.
 
 `Example`
 
-    winningProposal_, winnerName_
-
-```solidity
-function winningProposal()
-    public
-    view
-    returns (uint winningProposal_)
-{
-    uint winningVoteCount = 0;
-    for (uint p = 0; p < proposals.length; p++) {
-        if (proposals[p].voteCount > winningVoteCount) {
-            winningVoteCount = proposals[p].voteCount;
-            winningProposal_ = p;
-        }
-    }
-}
-```
+> winningProposal_, winnerName_
 
 ### Local and State Variable Names
 
@@ -1201,7 +1267,7 @@ Both variable types follow mixedCase naming style.
 
 `Example`
 
-    totalSupply, remainingSupply, balancesOf, creatorAddress, isPreSale, tokenExchangeRate
+> totalSupply, remainingSupply, balancesOf, creatorAddress, isPreSale, tokenExchangeRate
 
 ### Constants
 
@@ -1210,7 +1276,7 @@ words.
 
 `Example`
 
-    MAX_BLOCKS, TOKEN_NAME, TOKEN_TICKER, CONTRACT_VERSION
+> MAX_BLOCKS, TOKEN_NAME, TOKEN_TICKER, CONTRACT_VERSION
 
 ### Modifier Names
 
@@ -1218,7 +1284,7 @@ Use mixedCase.
 
 `Example`
 
-    onlyBy, onlyAfter, onlyDuringThePreSale
+> onlyBy, onlyAfter, onlyDuringThePreSale
 
 ### Enums
 
@@ -1227,7 +1293,7 @@ CapWords style.
 
 `Example`
 
-    TokenGroup, Frame, HashStyle, CharacterLocation
+> TokenGroup, Frame, HashStyle, CharacterLocation
 
 ### Avoiding Naming Collisions
 
@@ -1235,6 +1301,47 @@ CapWords style.
 
 This convention is suggested when the desired name collides with that of a
 built-in or otherwise reserved name.
+
+### Directory Naming
+
+#### Contract Directory Naming
+
+If the contract name consists of multiple words then separate the name of the directory containing the contract by `-`
+
+`Example`
+
+> If the contract name is `ValidatorSet`. The directory containing the contract
+should be `validator-set`
+
+#### Test Double Contract Directory Naming
+
+If the parent contract of the test contract consists of multiple words then
+separate the name of the folder containing the contract by `-`.
+The name of the parent contract will be used while naming the contract.
+
+`Example`
+
+> If the parent contract name is `ValidatorSet` and the test contract name is
+`ValidatorSetDouble`. The directory containing the contract should be `validator-set`.
+
+### Test Double Contract Naming
+
+If the contract name is `Foo`, then the names for the double contracts should be
+postfixed with `Stub`, `Fake`, `Mock`, `Spy` or generic `Double`.
+
+`Example`
+
+- For `Mock` contracts
+
+  - `FooMock` as the name of the contract
+
+- For `Spy` contracts
+
+  - `FooSpy` as the name of the contract
+
+- For `Double` contracts
+
+  - `FooDouble` as the name of the contract
 
 ## Best Practices
 
@@ -1245,7 +1352,7 @@ Variables should be always initialized.
 `Example`
 
 ```solidity
-function spam() internal {
+function spamInternal() internal {
     ...
     uint256 index = 0;
     bool isEmpty = false;
@@ -1261,7 +1368,7 @@ constructor call explicitly.
 `Good`
 
 ```solidity
-function spam(address a, bytes32 b, uint i) internal {
+function spamInternal(address a, bytes32 b, uint i) internal {
     ...
     require(a != address(0));
     require(b != bytes32(0));
@@ -1273,7 +1380,7 @@ function spam(address a, bytes32 b, uint i) internal {
 `Bad`
 
 ```solidity
-function spam(address a, bytes32 b) internal {
+function spamInternal(address a, bytes32 b) internal {
     ...
     require(a != 0);
     require(b != 0);
@@ -1357,49 +1464,22 @@ Documentation starting with `///` style should be avoided.
 
 Avoid using `@author` documentation tag.
 
-### Single Line
+### Contract Documentation
 
-Single line documentation format is:
+The documentation for contracts/libraries must have `@title` and `@notice`
+documentation tags.
 
-`Good`
+### Function Documentation
 
-```solidity
-/** @notice Returns storage root at the specified block height. */
-function getStorageRoot(uint256 _blockHeight)
-    public
-    view
-    returns (bytes32 /* storage root */)
-{
-    ...
-}
+If the function takes parameters and returns some value then the function documentation must have following sections:
 
-/** Bounty amount to take from facilitator on accepting stake. */
-uint256 public bounty;
-```
+- `@notice`
+- `@param`
+- `@return`
 
-`Bad`
-
-```solidity
-/**
- * @notice Returns storage root at the specified block height.
- */
-function getStorageRoot(uint256 _blockHeight)
-    public
-    view
-    returns (bytes32 /* storage root */)
-{
-    ...
-}
-
-/**
- * Bounty amount to take from facilitator on accepting stake.
- */
-uint256 public bounty;
-```
-
-### Multi Line
-
-Multi line documentation format is:
+**Note**: `@dev` section is optional, this will hold any extra details.
+`\pre` and `\post` sections are also optional.
+And no other section should be added to the function documentation.
 
 `Example`
 
@@ -1421,6 +1501,20 @@ function getStorageRoot(uint256 _blockHeight)
 }
 ```
 
+#### Pre and Post Documentation Tags
+
+`\pre` and `\post` documentation tags define preconditions and postconditions
+of functions. Both are not `natspec` documentation tags that's why we use `\pre`
+instead of `@pre` and `\post` instead of `@post`.
+
+Preconditions and postconditions should be only defined with regards
+to public/outworld facing functionality and semantic of the function.
+No implementation details should be exposed in `\pre` and `\post` conditions.
+One should be able to write negative and positive test cases following a function
+documentation and especially `\pre` and `\post` conditions.
+
+`\pre` and `\post` conditions are required for `external` and `public` interfaces.
+
 ### Structs and Mappings
 
 Document structs above the struct declaration.
@@ -1431,7 +1525,7 @@ Document struct fields above the respective field.
 ```solidity
 /** A Bank has a single owner. You need to create one bank per person. */
 struct Bank {
-    /** The owner of the bank functions simultaniously as the owner of the funds in balance. */
+    /** The owner of the bank functions simultaneously as the owner of the funds in balance. */
     address owner;
 
     /** The balance of the owner in Ethereum Wei. */
@@ -1469,7 +1563,7 @@ struct Message {
 ```solidity
 /** A Bank has a single owner. You need to create one bank per person. */
 struct Bank {
-    address owner; /** The owner of the bank functions simultaniously as the owner of the funds in balance. */
+    address owner; /** The owner of the bank functions simultaneously as the owner of the funds in balance. */
     uint256 balance; // The balance of the owner in Ethereum Wei.
 }
 ```
@@ -1488,6 +1582,50 @@ mapping (address => uint) public balances;
 ```solidity
 mapping (address => uint) public balances; /** balances stores per address the total balance in SimpleToken Wei. */
 mapping (address => uint) public balances; // balances stores per address the total balance in SimpleToken Wei.
+```
+
+### Single Line
+
+Single line documentation format is:
+
+`Good`
+
+```solidity
+/** Bounty amount to take from facilitator on accepting stake. */
+uint256 public bounty;
+```
+
+`Bad`
+
+```solidity
+/**
+ * Bounty amount to take from facilitator on accepting stake.
+ */
+uint256 public bounty;
+```
+
+### Multi Line
+
+Multi line documentation format is:
+
+`Example`
+
+```solidity
+/**
+ * @notice Returns storage root at the specified block height.
+ *
+ * @param _blockHeight Block height to return storage root.
+ *
+ * @return bytes32(0) if a storage root for specified block height was not
+ *         verified otherwise saved storage root.
+ */
+function getStorageRoot(uint256 _blockHeight)
+    public
+    view
+    returns (bytes32)
+{
+    ...
+}
 ```
 
 ### Spaces
@@ -1536,7 +1674,7 @@ All documentations starts with capital letter and end with `'.'` (dot).
  * @notice returns storage root at the specified block height
 ```
 
-When documenting a list, _in general_, items should not be formatted like an English sentence—the first word should only start with a capital letter if that would also be true were the word not first, and the item should not end with punctuation. However, English sentence formatting is OK if it improves readability and comprehension, such as in the case of very long list items.
+When documenting a list, *in general*, items should not be formatted like an English sentence—the first word should only start with a capital letter if that would also be true were the word not first, and the item should not end with punctuation. However, English sentence formatting is OK if it improves readability and comprehension, such as in the case of very long list items.
 
 `Good`
 
@@ -1789,9 +1927,7 @@ ordinary English sentence.
 
 Put a single space after `//` in comments.
 
-`NOTE:`
-
-    Commenting happens only inside functions.
+**NOTE:** Commenting happens only inside functions.
 
 `Good`
 
@@ -1853,52 +1989,51 @@ function processStaking(
     ...
 }
 ```
+
 ## Security
 
 ### Checks Effects Interactions
 
 [Checks effects interactions](https://github.com/fravoll/solidity-patterns/blob/master/docs/checks_effects_interactions.md) pattern should be used for writing contract methods which make external calls. This pattern reduces the attack surface for malicious contracts trying to hijack control flow after an external call.
 
-When to use this pattern: 
+When to use this pattern:
 
-* It cannot be avoided to hand over control flow to an external entity.
-* You want to protect your functions against re-entrancy attacks.
+- It cannot be avoided to hand over control flow to an external entity.
+- You want to protect your functions against re-entrancy attacks.
 
 Details:
 
-1. **Checks**: If input is not acceptable then fail fast and fail hard. 
+1. **Checks**: If input is not acceptable then fail fast and fail hard.
 
-    ```solidity
-    require(someCondition);
-    ```
+   ```solidity
+   require(someCondition);
+   ```
 
 2. **Effects**: Optimistically update the contract to a new valid state assuming that interactions will be successful. This protects the contract from re-entrancy attack and race conditions.
 
-    ```solidity
-    balance[msg.sender] = 0;
-    ```
+   ```solidity
+   balance[msg.sender] = 0;
+   ```
 
-3. **Interactions**: External calls, including `.send()`, `.transfer()` and `.call()`, must be done at the end of the method. 
+3. **Interactions**: External calls, including `.send()`, `.transfer()` and `.call()`, must be done at the end of the method.
 
-    ```solidity
-    require(otherContract.doSomething());
-    ```
+   ```solidity
+   require(otherContract.doSomething());
+   ```
 
+Example:
 
-Example: 
 ```
 function withdraw(uint256 _amount) public {
     require(balances[msg.sender] >= _amount); // Checks
 
     balances[msg.sender] -= _amount;          // Effects
 
-    require(                                 // Interactions 
+    require(                                 // Interactions
         msg.sender.send(_amount),
         "Fund transfer failed."
     );
 }
 ```
 
-**Note**: Even if emitting an event is technically considered as state change, it is not necessary to emit the event before an external call. For example, events could be listed at the end of the method in favor of readability. 
-
-
+**Note**: Even if emitting an event is technically considered as state change, it is not necessary to emit the event before an external call. For example, events could be listed at the end of the method in favor of readability.
